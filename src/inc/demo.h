@@ -26,9 +26,19 @@
 
 using namespace std;
 
-//全局函数声明开始
+//全局函数声明及相关结构体开始
 void *xmalloc(size_t size); //封装内存分配函数
-//全局函数声明结束
+
+typedef struct LNode{// 用于约瑟夫环
+    int data;
+    struct LNode *link;
+}LNode, *LinkList;
+
+//约瑟夫环，参数依次是：环的总人数，第一个开始报数的人，出列者喊的数
+void JOSEPHUS(int, int, int);
+
+
+//全局函数声明及相关结构体结束
 
 
 class LinuxSystemDemo {

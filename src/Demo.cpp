@@ -35,10 +35,12 @@ int main() {
 	printf("---------------------------\n");
 	l1->memoryMap();
 
+	JOSEPHUS(13, 4, 2);
+
 	return 0;
 }
 
-//全局函数开始
+//全局函数及开始
 
 //封装的内存分配函数
 void *xmalloc(size_t size) {
@@ -50,6 +52,40 @@ void *xmalloc(size_t size) {
 	}
 	return p;
 }
+
+//约瑟夫环，total是环的总人数，first是第一个开始报数的人，call是出列者喊的数
+void JOSEPHUS(int total, int first, int call){
+    LinkList p, r, curr;
+    //建立循环链表
+    p = (LNode *)malloc(sizeof(LNode));
+    p->data = 0;
+    p->link = p;
+    curr = p;
+    for (int i = 1; i < total; i++) {
+        LinkList t = (LinkList)malloc(sizeof(LNode));
+        t->data = i;
+        t->link = curr->link;
+        curr->link = t;
+        curr = t;
+    }
+    //把当前指针移动到第一个报数的人
+    r = curr;
+    while (first--) {
+        r = p;
+        p = p->link;
+    }
+    while (total--) {
+        for (int s = call - 1; s--; r = p,p = p->link) {
+    }
+        r->link = p->link;
+        printf("%d->", p->data);
+        free(p);
+        p = r->link;
+    }
+        printf("\n");
+}
+
+
 
 //全局函数结束
 
